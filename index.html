@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js"></script>
+	<head>
+		<meta charset="utf-8">
+		<title>Frutas</title>
+	</head>
+	<body onload="onLoad()">
+		<div class="container">
+			<div class="logo-container">
+				<h1 id="logo" class="center" onmouseover="startColors()" onmouseout="stopColors()">Frutas</h1>
+			</div>
+			<div class="buttons">
+				<button type="button" onclick="addFruta()">Adicionar Fruta</button>
+				<button type="button" onclick="removeFruta()">Remover Fruta</button>
+			</div>
+
+			<h2>Combo atual: <strong id="combo"></strong></h2>
+			<h2>Falhas: <strong id="falhas"></strong></h2>
+			<h2>Total de frutas: <strong id="qtd"></strong></h2>
+
+			<div class="vender">
+				<button type="button" onclick="vender()">Vender</button>
+			</div>
+
+			<h1>Pontos: <strong id="pontos"></strong></h1>
+			<ul>
+				<div id="frutas"></div>
+				<li id="escolha"></li>
+			</ul>
+		</div>
+	</body>
+</html>
