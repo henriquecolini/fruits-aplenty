@@ -41,6 +41,9 @@ function updateDados() {
 	document.getElementById("falhas").innerHTML = falhas;
 
 	if(checkTriumph()){
+
+		showAchievement("Alcance " + Math.pow(10,best-1) + " pontos");
+
 		var originalPontosColor = document.getElementById("pontos").style.color;
 
 		var blink = 0;
@@ -79,6 +82,7 @@ function updateFrutas() {
 	else {
 		document.getElementById("frutas").innerHTML = "";
 	}
+	window.scrollTo(0,document.body.scrollHeight);
 	updateDados();
 }
 
@@ -93,6 +97,15 @@ function removeFruta() {
 	falhas ++;
 	clickSound.cloneNode(true).play();
 	updateFrutas();
+}
+
+function showAchievement(text) {
+	document.getElementById("achievement-text").innerHTML = text;
+	document.getElementById("achievement").style.opacity = "1";
+}
+
+function hideAchievement() {
+	document.getElementById("achievement").style.opacity = "0";
 }
 
 function vender() {
@@ -160,6 +173,7 @@ function stopColors() {
 
 function onLoad() {
 	originalColor = document.getElementById("logo").style.color;
+	hideAchievement();
 	scrollFruta();
 	updateDados();
 }
