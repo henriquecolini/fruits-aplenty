@@ -1,6 +1,6 @@
 //--------------------------------------//
 
-var fruits = ["🍌 Banana", "🍏 Maçã", "🍍 Abacaxi", "🍓 Morango", "🍇 Uva"];
+var fruits = ["🍌 Banana", "🍏 Apple", "🍍 Pineapple", "🍓 Strawberry", "🍇 Grapes"];
 var fruitsList = [];
 var points = 0;
 var faults = 0;
@@ -60,7 +60,7 @@ function updateData() {
 		id("combo").innerHTML = combo.name + " x" + combo.qtd;
 	}
 	else {
-		id("combo").innerHTML = "nenhum";
+		id("combo").innerHTML = "none";
 	}
 
 	id("qtd").innerHTML = fruitsList.length;
@@ -69,7 +69,7 @@ function updateData() {
 
 	if(checkHighscore()){
 
-		showAchievement("Alcance " + Math.pow(10,highscore-1) + " pontos");
+		showAchievement("Reach " + Math.pow(10,highscore-1) + " points");
 
 		var originalPointsColor = id("points").style.color;
 

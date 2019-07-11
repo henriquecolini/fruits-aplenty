@@ -8,31 +8,31 @@
 	<script src="script.js"></script>
 	<head>
 		<meta charset="utf-8">
-		<title>Fruits</title>
+		<title>Fruit Game</title>
 	</head>
 	<body onload="onLoad()">
 		<div class="container">
 			<div class="tab-panel-wrapper">
 				<div class="tab-panel">
 					<div class="logo-container">
-						<h1 id="logo" class="center">Frutas</h1>
+						<h1 id="logo" class="center">Fruit Game</h1>
 					</div>
 					<div class="tab">
-						<button id="defaultOpen" class="tablinks" onclick="openPanel(event, 'controls')">Início</button>
-						<button class="tablinks" onclick="openPanel(event, 'shop')">Loja</button>
-						<button class="tablinks" onclick="openPanel(event, 'achievements')">Conquistas</button>
-						<button class="tablinks" onclick="openPanel(event, 'configuracoes')">Configurações</button>
+						<button id="defaultOpen" class="tablinks" onclick="openPanel(event, 'controls')">Start</button>
+						<button class="tablinks" onclick="openPanel(event, 'shop')">Shop</button>
+						<button class="tablinks" onclick="openPanel(event, 'achievements')">Achievements</button>
+						<button class="tablinks" onclick="openPanel(event, 'settings')">Settings</button>
 					</div>
 					<div id="controls" class="tabcontent">
 						<div class="header-bottom">
-							<h1>Pontos: <strong id="points"></strong></h1>
+							<h1>Points: <strong id="points"></strong></h1>
 							<div class="sell">
-								<div class="button" type="button" onclick="sell()"><i class="material-icons">attach_money</i> Vender</div>
+								<div class="button" type="button" onclick="sell()"><i class="material-icons">attach_money</i> Sell</div>
 							</div>
 						</div>
-						<h2>Combo atual: <strong id="combo"></strong></h2>
-						<h2>Falhas: <strong id="faults"></strong></h2>
-						<h2>Total de frutas: <strong id="qtd"></strong></h2>
+						<h2>Current combo: <strong id="combo"></strong></h2>
+						<h2>Penalties: <strong id="faults"></strong></h2>
+						<h2>Fruit total: <strong id="qtd"></strong></h2>
 
 					</div>
 					<div id="shop" class="tabcontent">
@@ -41,13 +41,13 @@
 					<div id="achievements" class="tabcontent">
 
 					</div>
-					<div id="configuracoes" class="tabcontent">
+					<div id="settings" class="tabcontent">
 
 					</div>
 				</div>
 				<div id="achievement">
 					<i class="material-icons">favorite</i>
-					<h2><strong>Nova Conquista!</strong></h2>
+					<h2><strong>New Achievement!</strong></h2>
 					<h3 id="achievement-text"></h3>
 					<i class="material-icons" id="achievement-close" onclick="hideAchievement()">close</i>
 				</div>
@@ -59,8 +59,8 @@
 				</ul>
 				<div>
 					<div class="buttons">
-						<div class="button" type="button" onclick="addFruit()"><i class="material-icons">add</i> Adicionar Fruta</div>
-						<div class="button" type="button" onclick="removeFruit()"><i class="material-icons">delete</i> Descartar Fruta</div>
+						<div class="button" type="button" onclick="addFruit()"><i class="material-icons">add</i> Add Fruit</div>
+						<div class="button" type="button" onclick="removeFruit()"><i class="material-icons">delete</i> Discard Fruit</div>
 					</div>
 				</div>
 			</div>
