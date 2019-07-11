@@ -1,0 +1,254 @@
+* {
+	box-sizing: border-box;
+	font-family: inherit;
+	user-select: none;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Roboto Slab', serif;
+	height: 100%;
+}
+
+h1, h2 {
+	color: #4c2525;;
+}
+
+h1 {
+	font-size: 50px;
+	font-weight: bold;
+	cursor: default;
+}
+
+h2 {
+	font-size: 30px;
+	margin: 20px 0;
+}
+
+li {
+	font-size: 20px;
+}
+
+li:nth-of-type(n+2) {
+	margin-top: 10px;
+}
+
+li:nth-last-of-type(1) {
+	margin-bottom: 10px;
+}
+
+#choice {
+	font-weight: bold;
+	margin-bottom: 0;
+	color: rgb(159, 6, 52);
+}
+
+strong {
+	font-weight: bold;
+	color: #d80853;
+	transition: color 0.1s;
+}
+
+.button {
+	padding: 0.25em;
+	font-size: 30px;
+	background-color: #df7664;
+	outline: none;
+	border: none;
+	color: white;
+	border-radius: 4px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	touch-action: manipulation;
+	transition: 0.1s;
+}
+
+.button .material-icons {
+	font-size: 30px;
+	margin-right: 0.1em;
+}
+
+.button::-moz-focus-inner {
+	border: 0;
+}
+
+.button:hover {
+	box-shadow: 2px 2px 9px 0px rgba(0, 0, 0, 0.16);
+	background-color: #e47764;
+}
+
+.logo-container {
+	flex-shrink: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 0;
+	background-color: #df7664;
+}
+
+.logo-container h1 {
+	color: white;
+}
+
+.center {
+	text-align: center;
+}
+
+.header-bottom {
+	border-bottom: solid 1px #ee9072;
+    padding: 20px 0;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/*-----------------------------------------------*/
+
+/* Style the tab */
+.tab {
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: row;
+	background-color: #d26d5b;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+	font-size: 20px;
+	padding: 10px;
+	color: white;
+	background-color: transparent;
+	border: none;
+    outline: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top: solid 3px transparent;
+	border-bottom: solid 3px transparent;
+	transition: 0.2s;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    border-bottom: solid 3px #ffeac7;
+}
+
+/* Style the tab content */
+.tabcontent {
+	height: 100%;
+	position: relative;
+	overflow: auto;
+    padding: 0 20px;
+	box-shadow: inset 0px 10px 12px -8px rgba(0,0,0,0.2),
+				inset 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
+}
+
+/*-----------------------------------------------*/
+
+.tab-panel {
+	background-color: #ffd7bd;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.game-panel {
+
+	background-image: url("bg.png");
+	box-shadow: inset 10px 0px 10px -10px rgba(0, 0, 0, 0.42);
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding: 0 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	height: 100%
+}
+
+.game-panel ul {
+	background-color: white;
+	border-radius: 4px;
+	padding: 16px;
+	margin-top: 20px;
+}
+
+.buttons {
+	display: flex;
+	margin: 20px 0;
+}
+
+.buttons .button {
+	flex: 1;
+}
+
+.buttons .button:nth-child(n+2) {
+	margin-left: 20px;
+}
+
+#achievement {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	bottom: 0;
+	margin: 20px;
+	color: white;
+	background-color: #e8476e;
+	border-radius: 4px;
+	opacity: 0;
+	transition: opacity 0.25s;
+	padding: 20px 10px;
+}
+
+#achievement .material-icons {
+	margin: 0 10px;
+}
+
+#achievement h3 {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+#achievement h2 {
+	margin: 0;
+}
+
+#achievement strong {
+	color: white;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
+.container>* {
+	flex: 1;
+}
+
+@media (max-width: 1000px) {
+	.container {
+		flex-direction: column;
+	}
+	.tab-panel {
+		flex: 0;
+	}
+	.buttons {
+		flex-direction: column;
+	}
+	.buttons .button:nth-child(n+2) {
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	.game-panel {
+		box-shadow: inset 0px 10px 10px -10px rgba(0, 0, 0, 0.42);
+	}
+}

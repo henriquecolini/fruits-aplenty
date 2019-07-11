@@ -1,50 +1,77 @@
-var frutas = ["Banana", "Maçã", "Abacaxi", "Morango", "Uva"];
-var frutasList = [];
-var pontos = 0;
-var falhas = 0;
-var currentFruta = "";
+//--------------------------------------//
+
+var fruits = ["🍌 Banana", "🍏 Maçã", "🍍 Abacaxi", "🍓 Morango", "🍇 Uva"];
+var fruitsList = [];
+var points = 0;
+var faults = 0;
+var currentFruit = "";
 var scrollTime = 100;
-var best = 1;
+var highscore = 1;
 var clickSound = new Audio("click.mp3");
-var venderSound = new Audio("vender.mp3");
+var sellSound = new Audio("sell.mp3");
+var scrollIndex = 0;
+
+//--------------------------------------//
+
+function id(id){
+	return document.getElementById(id);
+}
 
 function getCombo() {
-	var name = frutasList[0];
+	var name = fruitsList[0];
 	var qtd;
-	for (qtd = 0; qtd < frutasList.length && frutasList[qtd] == name; qtd++);
+	for (qtd = 0; qtd < fruitsList.length && fruitsList[qtd] == name; qtd++);
 	return {qtd,name};
 }
 
-function checkTriumph() {
-	if(pontos > 1) {
-		var digits = (pontos).toString().length;
-		if(digits > best) {
-			best = digits;
+function showAchievement(text) {
+	id("achievement-text").innerHTML = text;
+	id("achievement").style.opacity = "1";
+}
+
+function hideAchievement() {
+	id("achievement").style.opacity = "0";
+}
+
+//--------------------------------------//
+
+function scrollFruit() {
+	currentFruit = fruits[scrollIndex];
+	id("choice").innerHTML = currentFruit;
+	scrollIndex = scrollIndex == fruits.length - 1 ? 0 : scrollIndex + 1;
+	setTimeout(scrollFruit, scrollTime);
+}
+
+function checkHighscore() {
+	if(points > 1) {
+		var digits = (points).toString().length;
+		if(digits > highscore) {
+			highscore = digits;
 			return true;
 		}
 		return false;
 	}
 }
 
-function updateDados() {
+function updateData() {
 
-	if(frutasList.length > 0) {
+	if(fruitsList.length > 0) {
 		var combo = getCombo();
-		document.getElementById("combo").innerHTML = combo.name + " x" + combo.qtd;
+		id("combo").innerHTML = combo.name + " x" + combo.qtd;
 	}
 	else {
-		document.getElementById("combo").innerHTML = "nenhum";
+		id("combo").innerHTML = "nenhum";
 	}
 
-	document.getElementById("qtd").innerHTML = frutasList.length;
-	document.getElementById("pontos").innerHTML = pontos;
-	document.getElementById("falhas").innerHTML = falhas;
+	id("qtd").innerHTML = fruitsList.length;
+	id("points").innerHTML = points;
+	id("faults").innerHTML = faults;
 
-	if(checkTriumph()){
+	if(checkHighscore()){
 
-		showAchievement("Alcance " + Math.pow(10,best-1) + " pontos");
+		showAchievement("Alcance " + Math.pow(10,highscore-1) + " pontos");
 
-		var originalPontosColor = document.getElementById("pontos").style.color;
+		var originalPointsColor = id("points").style.color;
 
 		var blink = 0;
 		var blinkAmount = 4;
@@ -52,10 +79,10 @@ function updateDados() {
 		var a = setInterval(function() {
 
 			if(blink%2 == 0) {
-				document.getElementById("pontos").style.color = "rgb(255, 167, 85)";
+				id("points").style.color = "rgb(255, 167, 85)";
 			}
 			else {
-				document.getElementById("pontos").style.color = originalPontosColor;
+				id("points").style.color = originalPointsColor;
 			}
 
 			if(blink == (blinkAmount * 2) - 1) {
@@ -70,110 +97,67 @@ function updateDados() {
 
 }
 
-function updateFrutas() {
-	scrollTime = frutasList.length < 1 ? 100 : 500/Math.pow(frutasList.length,0.3)
-	if(frutasList.length > 0) {
-		var frutasUL = "";
-		for (var i = 0; i < frutasList.length; i++) {
-			frutasUL += "<li>" + frutasList[i] + "</li>";
+function updateFruits() {
+	scrollTime = fruitsList.length < 1 ? 100 : 500/Math.pow(fruitsList.length,0.3)
+	if(fruitsList.length > 0) {
+		var fruitsUL = "";
+		for (var i = 0; i < fruitsList.length; i++) {
+			fruitsUL += "<li>" + fruitsList[i] + "</li>";
 		}
-		document.getElementById("frutas").innerHTML = frutasUL;
+		id("fruits").innerHTML = fruitsUL;
 	}
 	else {
-		document.getElementById("frutas").innerHTML = "";
+		id("fruits").innerHTML = "";
 	}
-	window.scrollTo(0,document.body.scrollHeight);
-	updateDados();
+	id("game-panel").scrollTo(0,id("game-panel").scrollHeight);
+	updateData();
 }
 
-function addFruta() {
-	frutasList.push(currentFruta);
+function addFruit() {
+	fruitsList.push(currentFruit);
 	clickSound.cloneNode(true).play();
-	updateFrutas();
+	updateFruits();
 }
 
-function removeFruta() {
-	frutasList.pop();
-	falhas ++;
+function removeFruit() {
+	fruitsList.pop();
+	faults ++;
 	clickSound.cloneNode(true).play();
-	updateFrutas();
+	updateFruits();
 }
 
-function showAchievement(text) {
-	document.getElementById("achievement-text").innerHTML = text;
-	document.getElementById("achievement").style.opacity = "1";
-}
-
-function hideAchievement() {
-	document.getElementById("achievement").style.opacity = "0";
-}
-
-function vender() {
+function sell() {
 	var combo = getCombo().qtd;
-	pontos += (combo*combo) - (falhas*falhas);
-	frutasList = [];
+	points += (combo*combo) - (faults*faults);
+	fruitsList = [];
 	cliques = 0;
-	falhas = 0;
-	venderSound.cloneNode(true).play();
-	updateFrutas();
+	faults = 0;
+	sellSound.cloneNode(true).play();
+	updateFruits();
 }
 
-var scrollIndex = 0;
+function openPanel(evt, cityName) {
+    var tabcontent, tablinks;
 
-function scrollFruta() {
-	currentFruta = frutas[scrollIndex];
-	document.getElementById("escolha").innerHTML = currentFruta;
-	scrollIndex = scrollIndex == frutas.length - 1 ? 0 : scrollIndex + 1;
-	setTimeout(scrollFruta, scrollTime);
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    id(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
 
-var anim;
-var animValue = 0;
-var originalColor;
-
-function hwb2rgb(h, w, b) {
-
-  h *= 6;
-
-  var v = 1 - b, n, f, i;
-  if (!h) return {r:v, g:v, b:v};
-  i = h|0;
-  f = h - i;
-  if (i & 1) f = 1 - f;
-  n = w + f * (v - w);
-  v = (v * 255)|0;
-  n = (n * 255)|0;
-  w = (w * 255)|0;
-
-  switch(i) {
-    case 6:
-    case 0: return {r:v, g:n, b: w};
-    case 1: return {r:n, g:v, b: w};
-    case 2: return {r:w, g:v, b: n};
-    case 3: return {r:w, g:n, b: v};
-    case 4: return {r:n, g:w, b: v};
-    case 5: return {r:v, g:w, b: n};
-  }
-}
-
-function colorTick() {
-	animValue = animValue == 360 ? 0 : animValue + 1;
-	var rgb = hwb2rgb(animValue/360, 30/100, 10/100);
-	document.getElementById("logo").style.color = "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")";
-}
-
-function startColors() {
-	anim = setInterval(colorTick, 10);
-}
-
-function stopColors() {
-	clearInterval(anim);
-	document.getElementById("logo").style.color = originalColor;
-}
+//--------------------------------------//
 
 function onLoad() {
-	originalColor = document.getElementById("logo").style.color;
+	id("defaultOpen").click();
 	hideAchievement();
-	scrollFruta();
-	updateDados();
+	scrollFruit();
+	updateData();
 }

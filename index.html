@@ -3,48 +3,67 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="reset.css">
-	<link rel="stylesheet" href="frutas.css">
+	<link rel="stylesheet" href="fruits.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<script src="script.js"></script>
 	<head>
 		<meta charset="utf-8">
-		<title>Frutas</title>
+		<title>Fruits</title>
 	</head>
 	<body onload="onLoad()">
-		<div class="header-container">
-			<div class="header container">
-				<div class="logo-container">
-					<h1 id="logo" class="center" onmouseover="startColors()" onmouseout="stopColors()">Frutas</h1>
-				</div>
-				<div class="buttons">
-					<button type="button" onclick="addFruta()">Adicionar Fruta</button>
-					<button type="button" onclick="removeFruta()">Remover Fruta</button>
-				</div>
+		<div class="container">
+			<div class="tab-panel-wrapper">
+				<div class="tab-panel">
+					<div class="logo-container">
+						<h1 id="logo" class="center">Frutas</h1>
+					</div>
+					<div class="tab">
+						<button id="defaultOpen" class="tablinks" onclick="openPanel(event, 'controls')">Início</button>
+						<button class="tablinks" onclick="openPanel(event, 'shop')">Loja</button>
+						<button class="tablinks" onclick="openPanel(event, 'achievements')">Conquistas</button>
+						<button class="tablinks" onclick="openPanel(event, 'configuracoes')">Configurações</button>
+					</div>
+					<div id="controls" class="tabcontent">
+						<div class="header-bottom">
+							<h1>Pontos: <strong id="points"></strong></h1>
+							<div class="sell">
+								<div class="button" type="button" onclick="sell()"><i class="material-icons">attach_money</i> Vender</div>
+							</div>
+						</div>
+						<h2>Combo atual: <strong id="combo"></strong></h2>
+						<h2>Falhas: <strong id="faults"></strong></h2>
+						<h2>Total de frutas: <strong id="qtd"></strong></h2>
 
-				<h2>Combo atual: <strong id="combo"></strong></h2>
-				<h2>Falhas: <strong id="falhas"></strong></h2>
-				<h2>Total de frutas: <strong id="qtd"></strong></h2>
+					</div>
+					<div id="shop" class="tabcontent">
 
-				<div class="vender">
-					<button type="button" onclick="vender()"><i class="material-icons">attach_money</i> Vender</button>
-				</div>
+					</div>
+					<div id="achievements" class="tabcontent">
 
-				<div class="header-bottom">
-					<h1>Pontos: <strong id="pontos"></strong></h1>
-					<div id="achievement">
-						<i class="material-icons">favorite</i>
-						<h2><strong>Nova Conquista!</strong></h2>
-						<h3 id="achievement-text"></h3>
-						<i class="material-icons" id="achievement-close" onclick="hideAchievement()">close</i>
+					</div>
+					<div id="configuracoes" class="tabcontent">
+
 					</div>
 				</div>
-
+				<div id="achievement">
+					<i class="material-icons">favorite</i>
+					<h2><strong>Nova Conquista!</strong></h2>
+					<h3 id="achievement-text"></h3>
+					<i class="material-icons" id="achievement-close" onclick="hideAchievement()">close</i>
+				</div>
 			</div>
-		</div>
-		<div class="container">
-			<ul>
-				<div id="frutas"></div>
-				<li id="escolha"></li>
-			</ul>
+			<div id="game-panel" class="game-panel">
+				<ul>
+					<div id="fruits"></div>
+					<li id="choice"></li>
+				</ul>
+				<div>
+					<div class="buttons">
+						<div class="button" type="button" onclick="addFruit()"><i class="material-icons">add</i> Adicionar Fruta</div>
+						<div class="button" type="button" onclick="removeFruit()"><i class="material-icons">delete</i> Descartar Fruta</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
