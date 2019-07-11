@@ -3,7 +3,7 @@
 var fruits = ["🍌 Banana", "🍏 Apple", "🍍 Pineapple", "🍓 Strawberry", "🍇 Grapes"];
 var fruitsList = [];
 var points = 0;
-var faults = 0;
+var penalties = 0;
 var currentFruit = "";
 var scrollTime = 100;
 var highscore = 1;
@@ -65,7 +65,7 @@ function updateData() {
 
 	id("qtd").innerHTML = fruitsList.length;
 	id("points").innerHTML = points;
-	id("faults").innerHTML = faults;
+	id("penalties").innerHTML = penalties;
 
 	if(checkHighscore()){
 
@@ -121,17 +121,17 @@ function addFruit() {
 
 function removeFruit() {
 	fruitsList.pop();
-	faults ++;
+	penalties ++;
 	clickSound.cloneNode(true).play();
 	updateFruits();
 }
 
 function sell() {
 	var combo = getCombo().qtd;
-	points += (combo*combo) - (faults*faults);
+	points += (combo*combo) - (penalties*penalties);
 	fruitsList = [];
 	cliques = 0;
-	faults = 0;
+	penalties = 0;
 	sellSound.cloneNode(true).play();
 	updateFruits();
 }
